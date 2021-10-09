@@ -1,0 +1,83 @@
+// Project_2_: This file contains the 'main' function. Program execution begins and ends there.
+// Class: CMSC 203
+// Instructor: Gary C. Thai
+// Project 2
+// Description :Random Number Gesser  
+// Due Date : 2021-10-08
+// I pledge that I have completed the programming assignment independently.
+// I have not copied the code from a student or any source.
+// I have not given my code to any student.
+// Print your Name here : Karen Zulay Wilson
+
+import java.util.Scanner; 
+
+class RandomNumberGuesser{
+	public static void main(String[] args){
+		 @SuppressWarnings("resource")
+		Scanner keyboard = new Scanner(System.in);
+
+		int randNum, nextGuess, highGuess, lowGuess;
+        	highGuess=100;
+			lowGuess=1;
+			
+		String decision;
+			
+		randNum = RNG.rand();
+		
+		System.out.println( randNum);
+		System.out.println("\n\t\t\tGUESSING GAME!"+"\n\nI have already chosen a number between 0 - 100. Can you guess what it is?"+ 
+						  "\nPlease enter a number between 1 - 100");
+		nextGuess = keyboard.nextInt();
+		
+		while(nextGuess != randNum)
+			{
+		
+				while(!RNG.inputValidation(nextGuess, lowGuess, highGuess))
+				 {
+					 nextGuess = keyboard.nextInt();	
+				 }
+				 
+		     
+				 if (nextGuess > randNum)
+				 {
+					  highGuess = nextGuess;
+				   	  System.out.print("Oops! Your guess is too high! ");
+				  }
+		
+				 else if (nextGuess < randNum)
+				 {	 
+					 lowGuess = nextGuess;
+				     System.out.print("Oops! Your guess is too low!  ");
+				 }
+				 
+			  if (RNG.getCount() != 0)
+						System.out.print("Your guess count is " + RNG.getCount()/2 + ".");
+			  
+		 }
+				 
+
+	 if (nextGuess == randNum){
+		System.out.println("\nYAY! Your guess is correct! ");
+ 		
+      	System.out.println("\n\nWould you like to play the game again? Please enter Yes or no" );
+		decision = keyboard.nextLine();
+		
+			while (!decision.equalsIgnoreCase("Yes") && !decision.equalsIgnoreCase("No"))
+				{
+					System.out.print("Please enter Yes or No: ");
+					decision = keyboard.nextLine();
+				}
+		
+			if (decision.equalsIgnoreCase("Yes"))
+				{
+					RNG.resetCount();
+					main(args);
+				}
+		
+		else
+			System.out.print("\nTHANK YOU FOR USING THE GAME \nThis is Karen Wilson from Class CMSC 203.");
+			System.exit(0);
+	}
+ 
+  }
+}
